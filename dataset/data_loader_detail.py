@@ -331,9 +331,12 @@ class DataLoaderInf(Dataset):
     def __init__(self, rgb_dir, img_options=None):
         super(DataLoaderInf, self).__init__()
 
-        inp_files = sorted(os.listdir(os.path.join(rgb_dir, 'input')))
+        self.inp_filenames = []
 
-        self.inp_filenames = [os.path.join(rgb_dir, 'input', x) for x in inp_files if is_image_file(x)]
+        for root, _, files in os.walk(rgb_dir):
+            for file in files:
+                if is_image_file(file):
+                    self.inp_filenames.append(os.path.join(root, file))
 
         self.img_options = img_options
         self.sizex = len(self.inp_filenames)  # get the size of target_enh

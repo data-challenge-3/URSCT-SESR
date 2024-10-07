@@ -39,10 +39,16 @@ def main(test_loader, opt_test, mode):
     elif mode == 'infer':
         for i, (data, path) in enumerate(tqdm(test_loader)):
             input = data.to(device)
+
             with torch.no_grad():
                 restored_SR = model(input)
+
+            print(input.size())
+
+            basename = os.path.splitext(os.path.basename(path[0]))[0]
+
             torchvision.utils.save_image(restored_SR[0],
-                                         os.path.join(result_dir, os.path.splitext(os.path.basename(path[0]))[0] + '.png'))
+                                         os.path.join(result_dir, basename + '.png'))
 
 
 if __name__ == '__main__':
@@ -52,7 +58,7 @@ if __name__ == '__main__':
 
     with open('../configs/Enh_opt.yaml', 'r') as config:
         opt = yaml.safe_load(config)
-        opt_test = opt['TEST']
+        opt_test = opt['DEEPFISH']
     device = opt_test['DEVICE']
     model_detail_opt = opt['MODEL_DETAIL']
     result_dir = os.path.join(opt_test['SAVE_DIR'], opt['TRAINING']['MODEL_NAME'], 'test_results')
