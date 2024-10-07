@@ -24,8 +24,8 @@ def save_checkpoint(model_dir, state, session):
     torch.save(state, model_out_path)
 
 
-def load_checkpoint(model, weights):
-    checkpoint = torch.load(weights)
+def load_checkpoint(model, weights, device):
+    checkpoint = torch.load(weights, map_location=device)
     try:
         model.load_state_dict(checkpoint["state_dict"], strict=False)
     except:

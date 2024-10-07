@@ -354,7 +354,7 @@ class DataLoaderInf(Dataset):
 
         inp_img = TF.resize(inp_img, (self.ps[0], self.ps[1]))
 
-        return inp_img
+        return inp_img, inp_path
 
 class DataLoaderInfSR(Dataset):
     def __init__(self, rgb_dir, img_options=None, SR_scale=2):

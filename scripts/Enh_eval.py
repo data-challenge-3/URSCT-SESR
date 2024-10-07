@@ -37,19 +37,18 @@ def main(test_loader, opt_test, mode):
         print(
             "[SSIM] mean: {:.4f} std: {:.4f}".format(torch.stack(SSIMs).mean().item(), torch.stack(SSIMs).std().item()))
     elif mode == 'infer':
-        for i, data in enumerate(tqdm(test_loader)):
+        for i, (data, path) in enumerate(tqdm(test_loader)):
             input = data.to(device)
             with torch.no_grad():
                 restored_SR = model(input)
-            torchvision.utils.save_image(torch.cat((TF.resize(input[0], opt_test['TEST_PS']),
-                                                    restored_SR[0]), -1),
-                                         os.path.join(result_dir, str(i) + '.png'))
+            torchvision.utils.save_image(restored_SR[0],
+                                         os.path.join(result_dir, os.path.splitext(os.path.basename(path[0]))[0] + '.png'))
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', type=str, default='infer', choices=['infer', 'eval'], help='random seed')
-    mode = parser.parse_args().mode
+    mode = "infer"
 
     with open('../configs/Enh_opt.yaml', 'r') as config:
         opt = yaml.safe_load(config)
@@ -61,7 +60,7 @@ if __name__ == '__main__':
 
     model = URSCT(model_detail_opt).to(device)
     path_chk_rest = get_last_path(os.path.join(opt_test['SAVE_DIR'], opt['TRAINING']['MODEL_NAME'], 'models'), '_bestSSIM.pth')
-    load_checkpoint(model, path_chk_rest)
+    load_checkpoint(model, path_chk_rest, device)
     model.eval()
 
     test_loader = get_dataloader(opt_test, mode)
