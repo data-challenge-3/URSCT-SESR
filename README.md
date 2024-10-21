@@ -1,8 +1,34 @@
-# URSCT-SESR: Reinforced Swin-Convs Transformer for Simultaneous Underwater Sensing Scene Image Enhancement and Super-resolution
+# URSCT-SESR Swin Transformer reported
+
+This repo is a fork on the official [URSCT-SESR repository](https://github.com/TingdiRen/URSCT-SESR).
+This fork includes our custom notebook scripts to run the DeepFish dataset through the URSCT-SESR model.
+
+
+## Setup for using our scripts
+Use Python 3.9 as this has been tested to work with this repo.
+
+1. Clone this repository
+ ```bash
+    git clone git@github.com:data-challenge-3/URSCT-SESR.git
+    cd URSCT-SESR
+```
+2. Create a virtual environment
+```bash
+    python3 -m venv venv
+```
+3. Install the required packages
+```bash
+    pip install -r requirements.txt
+```
+4. Make sure to have the [DeepFish dataset](http://data.qld.edu.au/public/Q5842/2020-AlzayatSaleh-00e364223a600e83bd9c3f5bcd91045-DeepFish/) downloaded.
+5. Also make sure to have [Roboflow DeepFish dataset](https://universe.roboflow.com/brrrrrrr/deepfish-fmyzf/dataset/2) for any YOLO version, as all the datasets for YOLO are the same here.
+6. Update the paths for the datasets and run `scripts/filter_yolo_images.ipynb` to generate the enhanced images using the URSCT-SESR model for the DeepFish dataset.
+
+
+
+## Below is the original README from the official repository
+###  URSCT-SESR: Reinforced Swin-Convs Transformer for Simultaneous Underwater Sensing Scene Image Enhancement and Super-resolution
 [Tingdi Ren](http://www.adilifer.com/), Haiyong Xu, Gangyi Jiang, Mei Yu, Xuan Zhang, Biao Wang, and Ting Luo.
-
-
----
 
 
 [![arXiv](https://img.shields.io/badge/IEEE-Paper-%3CCOLOR%3E.svg)](https://ieeexplore.ieee.org/document/9881581)
