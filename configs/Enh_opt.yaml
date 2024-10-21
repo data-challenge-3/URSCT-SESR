@@ -4,7 +4,7 @@ GPU: [0,1]
 MODEL_DETAIL:
   IN_CHANS: 3
   OUT_CHANS: 3
-  IMG_SIZE: [512, 512]
+  IMG_SIZE: [640, 640]
   PATCH_SIZE: 2
   WIN_SIZE: 8
   EMB_DIM: 32
@@ -44,12 +44,12 @@ TEST:
   DEVICE: 'mps'
   NUM_WORKS: 0
   SAVE_DIR: '../exps/'
-  TEST_PS: [512, 512]
+  TEST_PS: [640, 640]
   TEST_DIR: '../../yolo/datasets/DeepFish-2' # path to validation dataset
 
 DEEPFISH:
   DEVICE: 'mps'
   NUM_WORKS: 0
   SAVE_DIR: '../exps/'
-  TEST_PS: [512, 512]
+  TEST_PS: [640, 640]
   TEST_DIR: '../../eda/data/DeepFish/' # path to validation dataset
